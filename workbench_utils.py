@@ -3122,7 +3122,7 @@ def create_media(config, filename, file_fieldname, node_id, csv_row, media_use_t
         if config['use_nid_in_media_title']:
             media_name = f"{node_id}-Original File"
         if config['field_for_media_title']:
-            media_name = csv_row[config['field_for_media_title']].replace(':', '_')
+            media_name = re.sub('[^0-9a-zA-Z]+', '_', csv_row[config['field_for_media_title']])
 
         # Create a media from an oEmbed URL.
         if media_type in get_oembed_media_types(config):
@@ -5871,7 +5871,7 @@ def get_preprocessed_file_path(config, file_fieldname, node_csv_row, node_id=Non
             downloaded_file_path = os.path.join(subdir, filename)
 
         if config['field_for_media_title']:
-            filename = node_csv_row[config['field_for_media_title']]
+            filename = re.sub('[^0-9a-zA-Z]+', '_', node_csv_row[config['field_for_media_title']])
             downloaded_file_path = os.path.join(subdir, filename)
 
         if config['use_nid_in_media_title']:
