@@ -4934,7 +4934,8 @@ def validate_parent_ids_precede_children(config, csv_data):
             if row[1]['position'] < positions[parent_id]['position']:
                 message = f"Child item with CSV ID \"{row[0]}\" must come after its parent (CSV ID \"{row[1]['parent_id']}\") in the CSV file."
                 logging.error(message)
-                sys.exit('Error: ' + message)
+                # BD MOD - continue through parent order issues so we can fix them in batches
+                # sys.exit('Error: ' + message)
 
 
 def validate_parent_ids_in_csv_id_to_node_id_map(config, csv_data):
