@@ -4845,7 +4845,8 @@ def validate_edtf_fields(config, field_definitions, csv_data):
                             if valid is False:
                                 message = 'Value in field "' + field_name + '" in row with ID ' + row[config['id_field']] + ' ("' + field_value + '") is not a valid EDTF date/time.'
                                 logging.error(message)
-                                sys.exit('Error: ' + message)
+                                # BD MOD - don't crash out on these
+                                # sys.exit('Error: ' + message)
 
     if edtf_fields_present is True:
         message = "OK, EDTF field values in the CSV file validate."
