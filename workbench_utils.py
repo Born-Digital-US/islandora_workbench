@@ -2000,9 +2000,9 @@ def check_input(config, args):
                             registered_extensions = get_registered_media_extensions(config, media_type, media_type_file_field)
                             if isinstance(extension, str) and isinstance(registered_extensions, dict) and extension not in registered_extensions[media_type_file_field]:
                                 message = 'File "' + file_check_row[filename_field] + '" in CSV row "' + file_check_row[config['id_field']] + \
-                                    '" has an extension (' + str(extension) + ') that is not allowed in the "' + media_type_file_field + '" field of the "' + media_type + '" media type.'
-                                logging.error(message)
-                                sys.exit('Error: ' + message)
+                                    '" has an extension (' + str(extension) + ') that is not allowed in the "' + media_type_file_field + '" field of the "' + media_type + '" media type. NOTE: this might be a 404.'
+                            # BD MOD - don't crash checks on probable 404s here
+                            # sys.exit('Error: ' + message)
 
     # Check existence of fields identified in 'additional_files' config setting.
     if (config['task'] == 'create' or config['task'] == 'add_media') and config['nodes_only'] is False and config['paged_content_from_directories'] is False:
